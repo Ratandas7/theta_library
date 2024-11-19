@@ -1,0 +1,193 @@
+{% extends "core/login_register_core.html" %}
+{% block title %} Create your account {% endblock title %}
+{% load static %}
+{% block content %}
+
+<div class="mx-5 lg:mx-0 my-16 sm:mt-16">
+
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    
+      <div class="bg-red-100 border border-red-400 text-red-600 px-4 py-3 rounded relative" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{error}}</p>
+      </div>
+    
+    {% endfor %}
+  {% endif %}
+
+
+  <div class="bg-gray-800 px-6 py-8 lg:px-8 lg:py-10 rounded-lg max-w-4xl mx-auto my-auto relative isolate">
+
+
+    <div class="flex justify-center">
+      <a href="/">
+          <img class="h-8 w-auto" src=" {% static 'img/logo.svg' %} " alt="Your Company">
+      </a>
+    </div>
+
+    <div class="mx-auto max-w-2xl text-center mt-5">
+  
+      <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-50 sm:text-4xl">
+        Create Account
+      </h2>
+  
+    </div>
+  
+    <form method="POST" class="mt-16 sm:mt-20">
+      {% csrf_token %}
+
+      {% for hidden_field in form.hidden_fields %}
+        {{hidden_field.errors}}
+        {{hidden_field}}
+      {% endfor %}
+  
+      <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+        <div>
+  
+          <label for="{{form.username.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only">{{form.username.label}}</label>
+  
+          <div class="mt-2.5">
+  
+            <input type="text" name="{{form.username.html_name}}" id="{{form.username.id_for_label}}" value="{{form.username.value|default_if_none:''}}" autocomplete="username" placeholder="Enter Username" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.username.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.username.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+
+
+        <div>
+  
+          <label for="{{form.email.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only">{{form.email.label}}</label>
+  
+          <div class="mt-2.5">
+  
+            <input type="email" name="{{form.email.html_name}}" id="{{form.email.id_for_label}}" value="{{form.email.value|default_if_none:''}}" autocomplete="email" placeholder="Enter Email" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.email.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.email.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+
+  
+        <div>
+  
+          <label for="{{form.first_name.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only"> {{form.first_name.label}} </label>
+  
+          <div class="mt-2.5">
+  
+            <input type="text" name="{{form.first_name.html_name}}" id="{{form.first_name.id_for_label}}" value="{{form.first_name.value|default_if_none:''}}" autocomplete="given-name" placeholder="First Name" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.first_name.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.first_name.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+  
+        <div>
+  
+          <label for="{{form.last_name.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only">{{form.last_name.label}}</label>
+  
+          <div class="mt-2.5">
+  
+            <input type="text" name="{{form.last_name.html_name}}" id="{{form.last_name.id_for_label}}" value="{{form.last_name.value|default_if_none:''}}" autocomplete="family-name" placeholder="Last Name" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.last_name.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.last_name.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+
+        <div>
+  
+          <label for="{{form.password1.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only">{{form.password1.label}}</label>
+  
+          <div class="mt-2.5">
+  
+            <input type="password" name="{{form.password1.html_name}}" id="{{form.password1.id_for_label}}" value="{{form.password1.value|default_if_none:""}}" autocomplete="password1" placeholder="Enter Password" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.password1.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.password1.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+
+        <div>
+  
+          <label for="{{form.password2.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900 sr-only">{{form.password2.label}}</label>
+  
+          <div class="mt-2.5">
+  
+            <input type="password" name="{{form.password2.html_name}}" id="{{form.password2.id_for_label}}" value="{{form.password2.value|default_if_none:""}}" autocomplete="password2" placeholder="Confirm Password" class="block w-full border-b-[1px] border-gray-400 focus:outline-0 px-3.5 py-2 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent"/>
+  
+          </div>
+
+          {% if form.password2.errors %}
+            <div class="text-red-500 text-sm">
+              {% for error in form.password2.errors %}
+                {{error}}
+              {% endfor %}
+            </div>
+          {% endif %}
+  
+        </div>
+        
+      </div>
+  
+      <div class="mt-10 flex justify-center">
+  
+        <button type="submit" class="block w-3/5 sm:w-2/5 rounded-md bg-gray-950 px-3.5 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950">CREATE ACCOUNT</button>
+  
+      </div>
+  
+    </form>
+
+    <div class="text-base/6 text-gray-300 text-center mt-10">
+      Already have an account?
+      <a href=" {% url "login" %} " class="font-semibold text-gray-50 hover:text-gray-300 underline ms-2">SIGN IN</a>
+    </div>
+
+    <div class="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6" aria-hidden="true">
+      <div class="aspect-[1155/678] w-[30rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+  
+  </div>
+  
+</div>
+
+
+{% endblock content %}

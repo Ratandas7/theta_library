@@ -1,0 +1,124 @@
+{% load static %}
+
+<nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div id="close_menu" class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!--
+              Icon when menu is closed.
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!--
+              Icon when menu is open.
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <a href="/">
+                <img class="h-8 w-auto" src=" {% static 'img/logo.svg' %} " alt="Your Company">
+            </a>
+          </div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="/" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Books</a>
+              {% comment %} <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a> {% endcomment %}
+
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          </button>
+  
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+            <div id="open_profile">
+              <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Open user menu</span>
+                {% comment %} <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> {% endcomment %}
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-gray-900 bg-white rounded-full p-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                  </svg>
+                  
+                
+              </button>
+            </div>
+  
+            <!--
+              Dropdown menu, show/hide based on menu state.
+  
+              Entering: "transition ease-out duration-100"
+                From: "transform opacity-0 scale-95"
+                To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+                From: "transform opacity-100 scale-100"
+                To: "transform opacity-0 scale-95"
+            -->
+            <div id="close_profile" class="hidden absolute right-0 z-30 mt-4 w-80 border border-gray-950 origin-top-right rounded-md bg-white px-4 py-5 shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <!-- Active: "bg-gray-100 outline-none", Not Active: "" -->
+              
+              {% if request.user.is_authenticated %}
+
+                <p class="font-extrabold">{{user.first_name}} {{user.last_name}}</p>
+                <div class="border-b-[1px] border-gray-700 pt-3 pb-5">
+                  <p class="font-medium">{{user.email}}</p>
+                </div>
+
+                <div class="text-lg font-semibold text-gray-900 py-4 max-w-xs border-b-[1px] border-gray-700">
+                  Balance : <span class="bg-green-100 text-gray-900 px-2 py-1 rounded-full">$ {{request.user.account.balance}}</span>
+                </div>
+
+                <a href="{% url "deposit_money" %}" class="block font-semibold hover:bg-gray-100 py-2 ps-1 mt-2 rounded" role="menuitem" tabindex="-1" id="user-menu-item-2">Deposit</a>
+
+                <a href="{% url "profile" %}" class="block font-semibold hover:bg-gray-100 py-2 ps-1 mt-2 rounded" role="menuitem" tabindex="-1" id="user-menu-item-2">Your Account</a>
+
+                <a href="{% url "borrow_history" %}" class="block font-semibold hover:bg-gray-100 py-2 ps-1 mt-2 rounded" role="menuitem" tabindex="-1" id="user-menu-item-2">Borrow & Return History</a>
+
+                <div class="border-t-[1px] border-gray-700 mt-2">
+                  <form action="{% url "logout" %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="block w-full font-semibold hover:bg-gray-950 py-2 ps-1 mt-5 rounded text-white bg-gray-800 text-center uppercase" role="menuitem" tabindex="-1" id="user-menu-item-2">Logout</button>
+                  </form>
+                </div>
+              
+              {% else %}
+                <a href=" {% url "login" %} " class="block px-4 py-2 text-base text-white bg-gray-800 hover:bg-gray-950 text-center rounded" role="menuitem" tabindex="-1" id="user-menu-item-0">SIGN IN</a>
+                <span class="block py-2 text-base text-gray-700">New User? <a href=" {% url "register" %} " class="underline text-blue-800" role="menuitem" tabindex="-1" id="user-menu-item-1">Create Account</a></span>
+              {% endif %}
+              
+              
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="hidden sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a href="/" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Books</a>
+        {% comment %} <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a> {% endcomment %}
+      </div>
+    </div>
+  </nav>
+  

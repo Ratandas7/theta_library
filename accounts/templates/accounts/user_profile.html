@@ -1,0 +1,148 @@
+{% extends "core/base.html" %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+
+
+<div class="min-h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
+
+    {% if form.non_field_errors %}
+
+        {% for error in form.non_field_errors %}
+
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+                <p class="font-bold">Error!</p>
+                <p class="block sm:inline">{{error}}</p>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    {% include "accounts/account.html" %}
+
+    <form method="post">
+        {% csrf_token %}
+
+
+        {% for hidden_field in form.hidden_fields %}
+        
+            {{hidden_field.errors}}
+            {{hidden_field}}
+        
+        {% endfor %}
+
+        <div class="mb-4">
+            <h4 class="font-semibold text-lg">Personal Details</h4>
+        </div>
+
+        
+        <div class="flex flex-wrap justify-between items-center sm:gap-x-8 gap-y-6 bg-gray-50 p-5 rounded mb-10">
+
+            <div class="w-full sm:w-auto">
+
+                <label class="text-gray-700">Username</label>
+
+                <div class="mt-1">
+                
+                    <p class=" text-gray-900 font-semibold">{{ form.instance.username }}</p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="w-1/2 sm:w-auto">
+
+                <label for="{{form.first_name.id_for_label}}" class="text-gray-700">
+                    {{form.first_name.label}}
+                </label>
+
+                <div class="mt-1">
+
+                    <input type="text" name="{{form.first_name.html_name}}" id="{{form.first_name.id_for_label}}" value="{{form.first_name.value|default_if_none:''}}" autocomplete="given-name" class="text-gray-900 font-semibold bg-transparent focus:outline-none border-b-[1px] border-b-gray-400 pb-1">
+
+                </div>
+
+                {% if form.first_name.errors %}
+                
+                    <div class="text-red-600 text-sm">
+                        {% for error in form.first_name.errors %}
+                            {{error}}
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+            </div>
+        
+        
+            <div class="w-1/2 sm:w-auto">
+
+                <label for="{{form.last_name.id_for_label}}" class=" text-gray-700">
+                    {{form.last_name.label}}
+                </label>
+
+                <div class="mt-1">
+
+                    <input type="text" name="{{form.last_name.html_name}}" id="{{form.last_name.id_for_label}}" value="{{form.last_name.value|default_if_none:''}}" autocomplete="family-name" class="text-gray-900 font-semibold bg-transparent focus:outline-none border-b-[1px] border-b-gray-400 pb-1">
+
+                </div>
+
+                {% if form.last_name.errors %}
+                
+                    <div class="text-red-600 text-sm">
+                        {% for error in form.last_name.errors %}
+                            <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+
+            <div class="">
+
+                <label for="{{form.email.id_for_label}}" class=" text-gray-700">
+                    {{form.email.label}}
+                </label>
+
+                <div class="mt-1">
+
+                    <input type="email" name="{{form.email.html_name}}" id="{{form.email.id_for_label}}" value="{{form.email.value|default_if_none:''}}" autocomplete="email" class="text-gray-900 font-semibold bg-transparent focus:outline-none border-b-[1px] border-b-gray-400 pb-1">
+
+                </div>
+
+                {% if form.email.errors %}
+                
+                    <div class="text-red-600 text-sm">
+                        {% for error in form.email.errors %}
+                            <p>{{error}}</p>
+                        {% endfor %}
+                    </div>
+                
+                {% endif %}
+
+            </div>
+
+            <div class="">
+
+                <button type="submit" class="rounded-md bg-gray-950 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950">
+                    Update
+                </button>
+
+            </div>
+        </div>
+
+    </form>
+
+
+    
+
+</div>
+  
+{% endblock content %}

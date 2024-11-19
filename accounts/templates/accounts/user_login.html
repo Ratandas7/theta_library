@@ -1,0 +1,112 @@
+
+{% extends "core/login_register_core.html" %}
+{% block title %}Login{% endblock title %}
+
+{% load static %}
+{% block content %}
+
+<div class="my-28 mx-5">
+
+    {% if form.non_field_errors %}
+
+        {% for error in form.non_field_errors %}
+
+            <div class="sm:mx-auto sm:w-lg sm:max-w-3xl px-2 mb-3">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <p class="font-bold">Error!</p>
+                    <p class="block sm:inline">{{error}}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+    <div class="flex min-h-full flex-col justify-center px-6 py-10 sm:mx-auto sm:w-full sm:max-w-sm bg-gray-800 rounded-lg relative isolate">
+
+        <div class="flex justify-center">
+            <a href="/">
+                <img class="h-8 w-auto" src=" {% static 'img/logo.svg' %} " alt="Your Company">
+            </a>
+        </div>
+
+        <div class="mt-5">
+          <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-100">Sign In</h2>
+        </div>
+      
+        <div class="mt-10">
+
+            <form class="space-y-6" method="POST">
+                {% csrf_token %}
+
+                {% for hidden_field in form.hidden_fields %}
+
+                    {{hidden_field.errors}}
+                    {{hidden_field}}
+
+                {% endfor %}
+
+                {% for field in form.visible_fields %}
+                
+                    <div>
+
+                        <label for="{{field.id_for_label}}" class="block text-sm/6 font-medium text-gray-100 sr-only">{{field.label}}</label>
+
+                        <div class="mt-2">
+
+                            <input id="{{field.id_for_label}}" name="{{field.name}}" type="{{field.widget_type}}" required placeholder="{{field.label}}" class="block w-full border-b-[1px] border-gray-400 focus:outline-none px-3.5 py-1.5 text-gray-100 placeholder:text-gray-200 sm:text-base/6 bg-transparent">
+
+                        </div>
+
+                        {% if field.errors %}
+                        
+                            <div class="text-red-500 text-sm">
+                                {% for error in field.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+                        
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+        
+                <div>
+
+                    <div class="flex items-center justify-end">
+
+                        <div class="text-sm">
+                            <a href="#" class="font-semibold text-gray-200 hover:text-gray-400">Forgot password?</a>
+                        </div>
+
+                    </div>
+
+                </div>
+        
+                <div class="flex justify-center">
+
+                    <button type="submit" class="w-3/5 sm:w-2/5 rounded-md bg-gray-950 px-3 py-1.5 text-base/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950 uppercase">Sign in</button>
+
+                </div>
+
+            </form>
+      
+            <p class="mt-10 text-center text-base/6 text-gray-400">
+                Don't have an account?
+                <a href=" {% url "register" %} " class="font-semibold text-gray-50 hover:text-gray-300 uppercase underline ms-2">Create Account</a>
+            </p>
+
+        </div>
+
+        <div class="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6" aria-hidden="true">
+            <div class="aspect-[1155/678] w-[30rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        </div>
+
+      </div>
+
+</div>
+  
+
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/output.css' %} ">
+</head>
+<body>
+    
+
+    <div class="mb-10">
+        <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl sr-only sm:not-sr-only">My Account</h2>
+    </div>
+
+    <div class="text-xl font-semibold text-gray-900 py-4 max-w-xs mb-10 border-y-2 border-y-gray-900 border-dotted">
+      Balance : <span class="bg-green-100 text-gray-900 px-2 py-1 rounded-full">$ {{request.user.account.balance}}</span>
+    </div>
+    
+    
+    <div class="flex justify-between max-w-2xl my-5 sr-only sm:not-sr-only">
+        <a href="{% url "deposit_money" %}" class="font-semibold text-gray-500 hover:text-gray-950">Deposit</a>
+        <a href="{% url "transaction_report" %}" class="font-semibold text-gray-500 hover:text-gray-950">Transaction Report</a>
+        <a href="{% url "borrow_history" %}" class="font-semibold text-gray-500 hover:text-gray-950">Borrow & Return History</a>
+        <a href="{% url "profile" %}" class="font-semibold text-gray-500 hover:text-gray-950">Personal Details</a>
+        <a href="{% url "change_password" %}" class="font-semibold text-gray-500 hover:text-gray-950">Update Password</a>
+    
+    </div>
+    
+    
+    
+    
+    <div class="relative inline-block text-left w-full not-sr-only sm:sr-only">
+        <div id="open_account">
+          <button type="button" class="inline-flex w-full justify-between items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-xl font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+            My Account
+            <svg class="-mr-1 size-10 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+              <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      
+        <!--
+          Dropdown menu, show/hide based on menu state.
+      
+          Entering: "transition ease-out duration-100"
+            From: "transform opacity-0 scale-95"
+            To: "transform opacity-100 scale-100"
+          Leaving: "transition ease-in duration-75"
+            From: "transform opacity-100 scale-100"
+            To: "transform opacity-0 scale-95"
+        -->
+        <div id="close_account" class="absolute hidden right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div class="py-1" role="none">
+            <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
+            <a href="{% url "deposit_money" %}" class="block px-4 py-2 text-base text-gray-900 hover:bg-gray-100 font-medium" role="menuitem" tabindex="-1" id="menu-item-0">Deposit</a>
+            <a href="{% url "transaction_report" %}" class="block px-4 py-2 text-base text-gray-900 hover:bg-gray-100 font-medium" role="menuitem" tabindex="-1" id="menu-item-0">Transaction Report</a>
+            <a href="{% url "borrow_history" %}" class="block px-4 py-2 text-base text-gray-900 hover:bg-gray-100 font-medium" role="menuitem" tabindex="-1" id="menu-item-0">Borrow & Return History</a>
+            <a href="{% url "profile" %}" class="block px-4 py-2 text-base text-gray-900 hover:bg-gray-100 font-medium" role="menuitem" tabindex="-1" id="menu-item-0">Personal Details</a>
+            <a href="{% url "change_password" %}" class="block px-4 py-2 text-base text-gray-900 hover:bg-gray-100 font-medium" role="menuitem" tabindex="-1" id="menu-item-0">Update Password</a>
+            
+            
+          </div>
+        </div>
+      </div>
+      
+    
+    
+    
+    
+    <div class="my-5">
+        <hr>
+    </div>
+    
+
+
+</body>
+</html>

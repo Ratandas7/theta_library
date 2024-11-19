@@ -1,0 +1,127 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block title %}Borrow History{% endblock title %}
+{% block content %}
+
+<div class="min-h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
+
+    {% include "accounts/account.html" %}
+
+
+    <section class="my-10 mx-2 sm:mx-0">
+        <div class="shadow-md mx-auto max-w-7xl px-2 sm:px-10 pb-10">
+    
+            <div class="mb-4">
+                <h4 class="font-semibold text-lg">Borrow & Return History</h4>
+            </div>
+        
+            
+    
+            <div class="overflow-x-auto snap-x">
+                <table class="table-fixed border-collapse border border-slate-900 w-full min-w-[1000px]">
+    
+                    <thead>
+                        <tr class="bg-gray-950 text-white">
+                            <th class="border-2 border-slate-900 py-2">Image</th>
+                            <th class="border-2 border-slate-900 py-2">Book Name</th>
+                            <th class="border-2 border-slate-900 py-2">Price</th>
+                            <th class="border-2 border-slate-900 py-2">Borrowed Date</th>
+                            <th class="border-2 border-slate-900 py-2">Status</th>
+                            <th class="border-2 border-slate-900 py-2">Returned Date</th>
+                            <th class="border-2 border-slate-900 py-2">Return</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        {% for borrow in borrows %}
+                            <tr class="text-center bg-white text-gray-950">
+
+                                <td class="border-2 border-slate-900 py-1 ps-12">
+                                    <a href="{% url "book_details" book_slug=borrow.book.slug pk=borrow.book.pk %}">
+                                        <img src="{{borrow.book.image.url}}" alt="{{borrow.book.name}}" class="w-14">
+                                    </a>
+                                </td>
+                                       
+
+                                <td class="border-2 border-slate-900 py-1 font-medium">
+                                    <a href="{% url "book_details" book_slug=borrow.book.slug pk=borrow.book.pk %}">
+                                        <p>{{borrow.book.name}}</p>
+                                    </a>
+                                </td>
+
+                                <td class="border-2 border-slate-900 py-1 font-medium">
+                                    <p>$ {{borrow.book.price|floatformat:2|intcomma}}</p>
+                                </td>
+
+
+                                <td class="border-2 border-slate-900 py-1">{{borrow.borrowed_date|date:"F d, Y h:i A"}}</td>
+
+
+                                <td class="border-2 border-slate-900 py-1 font-semibold">
+                                    <span class="px-3 py-1 mx-5 rounded-full block 
+                                    {% if borrow.status == 'returned' %}
+                                        text-red-700 bg-red-100
+                                    {% else %}
+                                        text-green-700 bg-green-100
+                                    {% endif %}">
+                                        {{ borrow.get_status_display }}
+                                    </span>
+                                </td>
+                                
+                                
+                                <td class="border-2 border-slate-900 py-1">
+                                    {% if borrow.status == 'returned' %}
+                                        <p class="text-red-600">{{borrow.return_date|date:"F d, Y h:i A"}}</p>
+                                    {% else %}
+                                        <p class="text-green-600">Not Returned</p>
+                                    {% endif %}
+                                </td>
+
+
+                                <td class="border-2 border-slate-900 py-1 font-semibold">
+                                    {% if borrow.status == 'returned' %}
+                                        <span class="px-3 py-1 mx-5 rounded-full block text-green-700 bg-green-100">
+                                            ACCEPTED
+                                        </span>
+                                    {% else %}
+                                    <a href="{% url "return_book" book_slug=borrow.book.slug id=borrow.book.pk %}">
+                                        <span class="px-3 py-1 mx-5 rounded-full block text-red-700 bg-red-100 hover:bg-red-300">
+                                            RETURN
+                                        </span>
+                                    </a>
+                                    {% endif %}
+                                </td>
+
+
+
+                            </tr>
+                            
+                        
+                        {% endfor %}
+                        
+                    </tbody>
+        
+                    
+    
+                </table>
+            </div>
+    
+    
+        </div>
+    </section>
+      
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
