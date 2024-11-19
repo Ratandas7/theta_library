@@ -15,6 +15,7 @@ from pathlib import Path
 import dj_database_url
 
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -112,6 +113,8 @@ DATABASES = {
     'default': dj_database_url.config(
     default='postgresql://theta_library_user:8zrkFxjAbU2smGjOieNQR0Po2OK9HcZd@dpg-csu8qjpu0jms738m2dng-a.oregon-postgres.render.com/theta_library',
     )}
+    
+
 
 
 
