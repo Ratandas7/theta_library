@@ -1145,10 +1145,6 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 250 / var(--tw-bg-opacity, 1));
 }
-.bg-indigo-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(224 231 255 / var(--tw-bg-opacity, 1));
-}
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }
