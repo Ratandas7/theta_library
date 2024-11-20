@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'theta_library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # DATABASES = {
@@ -109,10 +109,10 @@ WSGI_APPLICATION = 'theta_library.wsgi.application'
 
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-    default='postgresql://theta_library_user:8zrkFxjAbU2smGjOieNQR0Po2OK9HcZd@dpg-csu8qjpu0jms738m2dng-a.oregon-postgres.render.com/theta_library',
-    )}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#     default='postgresql://theta_library_user:8zrkFxjAbU2smGjOieNQR0Po2OK9HcZd@dpg-csu8qjpu0jms738m2dng-a.oregon-postgres.render.com/theta_library',
+#     )}
     
 
 
