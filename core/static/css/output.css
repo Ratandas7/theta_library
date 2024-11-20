@@ -575,6 +575,12 @@ video {
 .z-40 {
   z-index: 40;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
 .-m-2 {
   margin: -0.5rem;
 }
@@ -694,6 +700,33 @@ video {
 }
 .mt-5 {
   margin-top: 1.25rem;
+}
+.mt-40 {
+  margin-top: 10rem;
+}
+.mt-60 {
+  margin-top: 15rem;
+}
+.mt-56 {
+  margin-top: 14rem;
+}
+.ms-10 {
+  margin-inline-start: 2.5rem;
+}
+.ml-10 {
+  margin-left: 2.5rem;
+}
+.mr-10 {
+  margin-right: 2.5rem;
+}
+.-mr-10 {
+  margin-right: -2.5rem;
+}
+.-ml-10 {
+  margin-left: -2.5rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
 }
 .block {
   display: block;
@@ -1191,6 +1224,9 @@ video {
 .p-6 {
   padding: 1.5rem;
 }
+.p-0 {
+  padding: 0px;
+}
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1320,6 +1356,15 @@ video {
 }
 .pt-6 {
   padding-top: 1.5rem;
+}
+.pl-0 {
+  padding-left: 0px;
+}
+.ps-5 {
+  padding-inline-start: 1.25rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
 }
 .text-left {
   text-align: left;
@@ -1803,6 +1848,10 @@ video {
     position: static;
   }
 
+  .sm\:relative {
+    position: relative;
+  }
+
   .sm\:inset-auto {
     inset: auto;
   }
@@ -1948,6 +1997,10 @@ video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
   .sm\:flex-row-reverse {
     flex-direction: row-reverse;
   }
@@ -2017,6 +2070,10 @@ video {
     padding-top: 6rem;
   }
 
+  .sm\:pl-6 {
+    padding-left: 1.5rem;
+  }
+
   .sm\:text-left {
     text-align: left;
   }
@@ -2053,6 +2110,37 @@ video {
 
   .sm\:opacity-0 {
     opacity: 0;
+  }
+
+  .sm\:before\:absolute::before {
+    content: var(--tw-content);
+    position: absolute;
+  }
+
+  .sm\:before\:-left-60::before {
+    content: var(--tw-content);
+    left: -15rem;
+  }
+
+  .sm\:before\:-right-6::before {
+    content: var(--tw-content);
+    right: -1.5rem;
+  }
+
+  .sm\:before\:-top-6::before {
+    content: var(--tw-content);
+    top: -1.5rem;
+  }
+
+  .sm\:before\:bottom-0::before {
+    content: var(--tw-content);
+    bottom: 0px;
+  }
+
+  .sm\:before\:bg-gray-950::before {
+    content: var(--tw-content);
+    --tw-bg-opacity: 1;
+    background-color: rgb(3 7 18 / var(--tw-bg-opacity, 1));
   }
 }
 @media (min-width: 768px) {
